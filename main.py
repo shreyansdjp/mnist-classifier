@@ -41,11 +41,21 @@ class NeuralNet(nn.Module):
         return input
 
 
+class VerySimpleNeuralNet(nn.Module):
+    def __init__(self, in_features, out_features):
+        super().__init__()
+        self.layer = nn.Linear(in_features, out_features)
+
+    def forward(self, input):
+        return self.layer(input)
+
+
 EPOCHS = 100
 BATCH_SIZE = 64
 LR = 1e-4
 
-model = NeuralNet(28 * 28, 10)
+# model = NeuralNet(28 * 28, 10)
+model = VerySimpleNeuralNet(28 * 28, 10)
 loss_fn = nn.CrossEntropyLoss()
 # optimizer = optim.SGD(model.parameters(), lr=LR)
 optimizer = optim.Adam(model.parameters(), lr=LR)
